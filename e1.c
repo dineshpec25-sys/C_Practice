@@ -1,15 +1,15 @@
 #include <stdio.h>
 int main()
 {
-    int x , y;
+    int x ;
     x = 1;
-    y = 0;
 
-    loop: if(x < 6)
+    loop: if(x < 10)
     {
-        y = y + x;
+        if((x%2) != 0){
+            printf("%d\n", x);
+        }
         x++;
         goto loop;
     }
-    printf("%d\n", y);
 }
