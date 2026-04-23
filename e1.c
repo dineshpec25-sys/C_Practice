@@ -2,11 +2,11 @@
 int main()
 {
     int x;
-    x = 1;
+    x = 5;
 
-    loop: if(x < 6)
+    loop: if(x > 0)
     {
-        printf("%d\n", x++);
+        printf("%d\n", x--);
         goto loop;
     }
 }
