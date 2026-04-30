@@ -1,0 +1,16 @@
+
+
+Basics steps to write the program
+    1.write the working of the code in english
+    2.next convert it into program (alogrthium)
+    3.then only code
+
+Note : "if" is very important
+
+lable:if(condition){
+    statement
+    goto lable
+}
+
+Note : use less number of variables
+
