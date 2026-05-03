@@ -1,0 +1,6 @@
+1. take the last digit of two numerical string.
+2. Add them by converting them into interger
+3. check for carry by / 10
+4. if yes carry only add the last digit of the result 
+5. if carry is for the first digit use realoc and add another
+   slot and add the both digit to it
