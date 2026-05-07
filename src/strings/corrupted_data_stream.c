@@ -37,7 +37,7 @@ int main()
             else if(strcmp(tar, "CMD:B_ON0") == 0)
                 printf("Blue_On\n");
 
-            i += 8;
+            i += 7;
 
         }
     }
