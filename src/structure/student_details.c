@@ -6,6 +6,22 @@ struct student{
     int student_mark;
 };
 
+void dis(struct student s[])
+{
+    int great = s[0].student_mark;
+    int count = 0;
+    for(int i = 0; i < 5; i++)
+    {
+        if( s[i].student_mark > great)
+        {
+            great = s[i].student_mark;
+            count = i;
+        }
+    }
+
+    printf("%s scored the highest mark\n", s[count].student_name);
+}
+
 int main()
 {
     struct student s[5];
@@ -21,19 +37,6 @@ int main()
         printf("Enter the mark of the student:");
         scanf("%d", &s[i].student_mark);
     }
-
-    int great = s[0].student_mark;
-    int count = 0;
-    for(int i = 0; i < 5; i++)
-    {
-        if( s[i].student_mark > great)
-        {
-            great = s[i].student_mark;
-            count = i;
-        }
-    }
-
-    printf("%s scored the highest mark\n", s[count].student_name);
 
     return 0;
 }
