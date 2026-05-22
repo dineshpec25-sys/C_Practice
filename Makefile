@@ -1,17 +1,20 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-TARGET = build/corrupted_data_stream
-SOURCE = src/strings/corrupted_data_stream.c
+SRC = $(wildcard src/*/*.c)
 
-all: $(TARGET)
+TARGETS = $(patsubst src/%.c,build/%,$(SRC))
 
-$(TARGET): $(SOURCE)
-	mkdir -p build
-	$(CC) $(CFLAGS) $(SOURCE) -o $(TARGET)
+all: $(TARGETS)
 
-run: all
-	./$(TARGET)
+build/%: src/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $< -o $@
+
+run:
+	@echo "Usage: make run FILE=folder/program"
+
+	@if [ -n "$(FILE)" ]; then ./build/$(FILE); fi
 
 clean:
-	rm -f $(TARGET)
+	rm -rf build
