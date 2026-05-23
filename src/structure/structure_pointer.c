@@ -46,16 +46,7 @@ int main()
         return 1;
     }
 
-    for(int i = 0; i < 5; i++)
-    {
-        printf("Enter the account number:");
-        scanf("%d", &p[i]->acc_num);
-
-        printf("Enter the current balance:");
-        scanf("%d", &p[i]->balance);
-
-        fprint(fp, "%d %d\n" , *p[i]->acc_num, *p[i]->balance);
-    }
+    
     fclose(fp);
 
     printf("\nData saved successfully");
