@@ -17,7 +17,6 @@ void dis(struct student *ptr)
 int main()
 {
     struct student s;
-
     struct student *p;
 
     p=&s;
