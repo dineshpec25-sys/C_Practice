@@ -14,6 +14,7 @@ struct student
     struct Date dob;
 };
 
+int *studentdis(struct student *p, int target, int count);
 int main()
 {
     struct student *s;
@@ -38,14 +39,30 @@ int main()
     printf("Enter the target roll : ");
     scanf("%d", &tar);
 
+    int *dob = studentdis(s, tar, count);
+
+    free(dob);
+    free(s);
+
+    printf("The DOB %d/%d/%d\n", dob[0], dob[1], dob[2]);
+    return 0;
+}
+
+int *studentdis(struct student *p, int target, int count)
+{
+    int *result;
+    result=malloc(3 * sizeof(int));
+
     for(int i = 0; i < count; i++)
     {
-        if(tar == s[i].roll)
+        if(target == p[i].roll)
         {
-            printf("The Birthday of the student is %d/%d/%d\n", s[i].dob.day, s[i].dob.month, s[i].dob.year);
+            result[0]=p[i].dob.day;
+            result[1]=p[i].dob.month;
+            result[2]=p[i].dob.year;
+
             break;
         }
     }
-
-    return 0;
+    return result;
 }
