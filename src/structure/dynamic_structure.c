@@ -12,9 +12,13 @@ int main()
 {
     struct student *ptr;
 
-    ptr = malloc(5 * sizeof(struct student));
+    int n;
+    printf("Enter the  count of the student : ");
+    scanf("%d", &n);
 
-    for(int i = 0; i < 5; i++)
+    ptr = malloc(n * sizeof(struct student));
+
+    for(int i = 0; i < n; i++)
     {
         printf("Enter the Roll number of the student : ");
         scanf("%d", &ptr[i].roll);
@@ -26,9 +30,18 @@ int main()
         scanf("%e", &ptr[i].attendencse);
     }
 
-    printf("Roll Number : %d\n", ptr[3].roll);
-    printf("Marks : %.2f\n", ptr[2].marks);
-    printf("Attendence : %.2f%%\n", ptr[2].attendencse);
+    float avg = 0;
+    float sum=0;
+    for(int i = 0; i < n; i++)
+    {
+        sum = sum + ptr[i].marks;
+    }
 
+    avg = sum/n;
+
+    printf("The avg : %.2f\n", avg);
+
+    free(ptr);
+    
     return 0;
 }
