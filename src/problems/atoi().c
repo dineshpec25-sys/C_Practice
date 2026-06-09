@@ -1,16 +1,51 @@
 #include <stdio.h>
-#include <string.h>
+#include <limits.h>
 
 int ascii_converter(char input[50])
 {
     int integer=0;
-    for(int i = 0; input[i] != '\0'; i++)
+    int present=1;
+    int i = 0;
+    for(;input[i] != '\0'; i++)
     {
-        if(input[i] >= '0' && input[i] <= '9')
-            integer = (input[i] - '0') +(integer*10);
-        
+        if(input[i] == ' ')
+        {
+            continue;
+        }
+        else{
+            break;
+        }
     }
-    return integer;
+    if(input[i] == '-')
+    {    present=-1;
+        i++;
+    }
+    else if(input[i] == '+')
+    {
+        i++;
+    }
+    for(; input[i] != '\0'; i++)
+{
+    if(input[i] >= '0' && input[i] <= '9')
+    {
+        int digit = input[i] - '0';
+
+        if(integer > (INT_MAX - digit) / 10)
+        {
+            if(present == 1)
+                return INT_MAX;
+            else
+                return INT_MIN;
+        }
+
+        integer = integer * 10 + digit;
+    }
+    else
+    {
+        break;
+    }
+}
+    return integer * present;
 }
 int main()
 {
