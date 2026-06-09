@@ -25,11 +25,27 @@
 #include <stdio.h>
 #include <stdint.h>
 
-uint32_t update_register(uint32_t reg) {
+uint16_t update(uint16_t reg)
+{
+    uint8_t target_field = 0;
 
-    return 0;
+    // extract bits 10-14
+    target_field = (reg >> 10) & 0b11111;
+
+    // increment max 31
+    if(target_field < 31)
+    {
+        target_field++;
+    }
+
+    // clear old bits 10-14
+    reg &= ~(0b11111 << 10);
+
+    // write new value
+    reg |= (target_field << 10);
+
+    return reg;
 }
-
 int main() {
     uint32_t reg;
     scanf("%u", &reg);
