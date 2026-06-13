@@ -22,7 +22,7 @@ int options()
 }
 emp *add_employe(emp e[], int *employee_count)
 {
-    emp *temp = realloc(e, employee_count);
+    emp *temp = realloc(e, *employee_count);
     if(temp == NULL)
     {
         printf("Memory failed");
