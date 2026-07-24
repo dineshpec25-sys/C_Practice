@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct node
 {
 	int data;
@@ -21,9 +22,13 @@ int main()
 	second_node->next = NULL; // now this node points to nowhere
 
 	head->next = second_node; // assigning address of the second node to next pointer of the head
-	printf("%d\n", head->data);
-	printf("%d\n", second_node->data);
-
+	
+	struct node *temp = head;
+	while(temp != NULL)
+	{
+		printf("%d\n", temp->data);
+		temp=temp->next;
+	}
 	free(head);
 	free(second_node);
 
