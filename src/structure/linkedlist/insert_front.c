@@ -41,16 +41,12 @@ int main()
 	new_node = malloc(sizeof(struct node));
 	new_node->data = 9;
 
-	swap(new_node, head);
-
-	new_node->next = head->next;
-	head->next = new_node;
-
+	new_node->next = head;
+	head = new_node;
 	display(head);
 	
 	free(head);
 	free(second);
-	free(new_node);
 
 	return 0;
 }
