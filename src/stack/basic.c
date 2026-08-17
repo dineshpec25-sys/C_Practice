@@ -25,11 +25,17 @@ void dis()
 
 int main()
 {
-	int data=10;
+	int input_count=0;
+	printf("Enter the number of input :");
+	scanf("%d", &input_count);
 
-	PUSH(data);
+	for(int i =  input_count; i > 0; i--)
+	{
+		int data;
+		printf("Enter the number to add to the stack: ");
+		scanf("%d", &data);
 
-	data=11;
-	PUSH(data);
+		PUSH(data);
+	}
 	dis();
 }
