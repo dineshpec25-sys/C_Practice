@@ -23,6 +23,18 @@ void dis()
 	}
 }
 
+void POP()
+{
+	if( top == -1)
+	{
+		printf("Stack Underflow\n");
+		return ;
+	}
+
+	printf("%d is poped\n", stack[top]);
+	top--;
+}
+
 int main()
 {
 	int input_count=0;
@@ -36,6 +48,13 @@ int main()
 		scanf("%d", &data);
 
 		PUSH(data);
+	}
+	dis();
+
+	for(int i = input_count; i> 0; i--)
+	{
+		int data;
+		POP();
 	}
 	dis();
 }
