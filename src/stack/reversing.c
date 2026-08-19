@@ -26,6 +26,11 @@ int POP()
 	return temp;
 }
 
+void dis(char *str)
+{
+	printf("The reverse of the array : %s\n", str);
+}
+
 int main()
 {
 	char str[MAX];
@@ -43,7 +48,7 @@ int main()
 	{
 		str[i] = POP();
 	}
-	printf("The string : %s\n", str);
+	dis(str);
 	return 0;
 }
 
