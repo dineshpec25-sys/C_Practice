@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "address.h"
 
 #ifndef GPIO_H
 #define GPIO_H
@@ -9,14 +10,16 @@
 #define HIGH 1
 #define LOW 0
 
-uint16_t ddr_add[12] = {0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33, 0x101, 0, 0x104, 0x107, 0x10A};
-uint16_t port_add[12] = {0x22, 0x25, 0x28, 0x2B, 0x2E, 0x31, 0x34, 0x102, 0, 0x105, 0x108, 0x10B};
-
+int constrain(char port, int pin)
+{
+	if(pin > 7 || pin < 0 || port == 'I' || port > 'L' || port < 'A')
+		return 1;
+	return 0;
+}
 void MODE_SET(char dir, int pin, char mode)
 {
-	if(pin > 7 || pin < 0 || dir == 'I' || dir > 'L' || dir < 'A')
+	if(constrain(dir, pin))
 		return;
-	//int ddr_add[11] = {0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33, 0x101, NULL, 0x104, 0x107, 0x10A};
 	volatile unsigned char* ddr = (volatile unsigned char*) ddr_add[dir-65];
 	
 	uint8_t mask = (1 << pin);
@@ -30,16 +33,13 @@ void MODE_SET(char dir, int pin, char mode)
 	}
 	else
 		return;
-	//	printf("Invalid Mode\n");
 }
 
 void GIVE_OUT(char pt, int pin, char value)
 {
-	//int port_add[12] = {0x22, 0x25, 0x28, 0x2B, 0x2E, 0x31, 0x34, 0x102, NULL, 0x105, 0x108, 0x10B};
 	
-	if(pt == 'I' || pt > 'L' || pt < 'A' || pin > 7 || pin < 0)
+	if(constrain(pt, pin))
 		return;
-
 
 	volatile unsigned char* port = (volatile unsigned char*) port_add[pt-65];
 
@@ -52,8 +52,39 @@ void GIVE_OUT(char pt, int pin, char value)
 		mask = ~mask;
 		*port &= mask;
 	}
-	//else
-	//	printf("Invalid value\n");
+	else
+		return;
+}
+
+#define PULLUP 1
+#define PULLDOWN 0
+
+int TAKE_IN(char pt, int pn, char resistor)
+{
+	if(constrain(pt,pn))
+		return -1;
+	uint8_t mask = ~(1 << pn);
+	volatile unsigned char* port = (volatile unsigned char*) port_add[pt-65];
+	volatile unsigned char* pin = (volatile unsigned char*) pin_add[pt-65];
+	
+	uint8_t status = 0;
+
+	//Pull up or down desision making
+	if(resistor == 1)
+	{	status = 1;
+		*port |= (1 << pn);
+	}
+	else if(resistor == 0)
+	{	status = 0;
+		*port &= mask;
+	}
+	
+	uint8_t level = (*pin >> pn) & 1;   // read once, 0 or 1
+
+	if(status == 1)                     // pull-up: pressed = low, so flip
+		level = !level;
+	                                    // pull-down: pressed = high, use as is
+	return level;
 }
 
 void stay_still(unsigned long duration)
@@ -64,5 +95,4 @@ void stay_still(unsigned long duration)
 	}
 }
 
-#endif
-		
+#endif		
