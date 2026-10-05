@@ -22,6 +22,16 @@ void clear_all()
 	GIVE_OUT('G', 5, LOW);   
 }
 
+void zero()
+{
+	A_HIGH;
+	B_HIGH;
+	C_HIGH;
+	D_HIGH;
+	E_HIGH;
+	F_HIGH;
+}
+
 void one()
 {
 	B_HIGH;
@@ -113,6 +123,7 @@ void seg_7(int num)
 	MODE_SET('E',5,OUT);
 	switch(num)
 	{
+		case 0:zero(); break;
 		case 1:one(); break;
 		case 2:two(); break;
 		case 3:three(); break;
