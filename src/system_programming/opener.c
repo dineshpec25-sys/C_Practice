@@ -3,10 +3,24 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    char path[] = "/home/acer/C_Practice/src/system_programming/out.txt";
+    if (argc < 2) {
+        printf("usage: %s <filename>\n", argv[0]);
+        return 1;
+    }
+
+    char *path = argv[1];
+
     long fd = syscall(SYS_open, path, O_RDONLY);
-    printf("fd = %ld\n", fd);
+    if (fd == -1) {
+        printf("open failed\n");
+        return 1;
+    }
+
+    char buf[100000];
+    long n = syscall(SYS_read, fd, buf, 100000);
+    syscall(SYS_write, 1, buf, n);
+    syscall(SYS_close, fd);
     return 0;
 }
