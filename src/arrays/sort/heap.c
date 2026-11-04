@@ -66,4 +66,5 @@ int main(int argc, char **argv)
     int *arr = con(argv, n);
     sort(arr,n);
     dis(arr,n);
+    free(arr);
 }

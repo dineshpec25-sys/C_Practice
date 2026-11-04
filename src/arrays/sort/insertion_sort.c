@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//in insertion sort
 int *conversion(char **in, int n)
 {
     int *arr = (int*)malloc(sizeof(int)*n);
