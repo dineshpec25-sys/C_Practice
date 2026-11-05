@@ -53,4 +53,5 @@ int main(int argc, char **argv){
     int *arr = con(argv,n);
     sort(arr, 0, n-1);
     display(arr,n);
+    return;
 }
