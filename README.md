@@ -39,7 +39,7 @@ Each program is organized in separate files with descriptive names. Comments are
 - K&R (The C Programming Language)
 - GeeksforGeeks C tutorials
 - LeetCode and HackerRank C problems
-- Linux
+
 ## Contributing
 
 Feel free to add more practice programs or improve existing ones.
